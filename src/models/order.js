@@ -26,6 +26,11 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: [true, "Message is required"],
   },
+  unitId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Unit',
+    required: [true, "Unit is required"],
+  },
 }, { timestamps: true });
 
 const Order = mongoose.model('Order', orderSchema);

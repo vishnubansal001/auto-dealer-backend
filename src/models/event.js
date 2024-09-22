@@ -18,6 +18,10 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: [true, "Event Type is required"],
   },
+  message:{
+    type: String,
+    required: [true, "Message is required"],
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
