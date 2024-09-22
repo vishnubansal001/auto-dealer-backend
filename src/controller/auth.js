@@ -26,9 +26,12 @@ exports.signUp = async (req, res) => {
       role: "user",
     });
     await user.save();
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const t = { ...user._doc, jwtToken: token };
+    console.log(t);
     return res
       .status(200)
-      .json({ message: "User created successfully", user: user });
+      .json({ message: "User created successfully", user: { ...user._doc, jwtToken: token }, });
   } catch (err) {
     console.log("Error in signUp", err);
     return res.status(500).json({ message: "Internal Server Error" });
@@ -72,7 +75,7 @@ exports.getProfileInfo = async (req, res) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id).select('-password');
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

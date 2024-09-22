@@ -24,7 +24,7 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: [true, "Event Type is required"],
     },
-    message: {
+    description: {
       type: String,
       required: [true, "Message is required"],
     },

@@ -51,3 +51,14 @@ exports.getSingleCar = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+exports.getHomePageCars = async (req, res) => {
+  try {
+    const units = await Unit.find().limit(4);
+
+    return res.status(200).json({ units });
+  } catch (err) {
+    console.error("Error in getHomePageUnits:", err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};

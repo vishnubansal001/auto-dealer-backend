@@ -7,13 +7,18 @@ const userRouter = require("./routes/user");
 const usersRouter = require("./routes/users");
 const eventRouter = require("./routes/event");
 const orderRouter = require("./routes/order");
+const unitRouter = require("./routes/unit");
+const authRouter = require("./routes/auth");
+const purchaseRouter = require("./routes/purchase");
+const carRouter = require("./routes/car");
+const contactRouter = require("./routes/contact");
 
 const init = async () => {
   const app = express();
   const port = process.env.PORT || 4000;
   const corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: ["http://localhost:3000", "http://localhost:5173"],
+    credentials: true,
   };
 
   app.use(
@@ -31,7 +36,15 @@ const init = async () => {
   app.use(express.json());
   app.use(cors(corsOptions));
 
-  app.use("/api/v1", userRouter, usersRouter, eventRouter, orderRouter);
+  app.use(
+    "/api/v1",
+    userRouter,
+    usersRouter,
+    eventRouter,
+    orderRouter,
+    unitRouter
+  );
+  app.use("/api/v2", authRouter, purchaseRouter, carRouter, contactRouter);
 
   app.get("/", (req, res) => {
     res.send(`this is the dummy home page for the testing!!`);

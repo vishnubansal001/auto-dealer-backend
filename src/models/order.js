@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: [true, "Location is required"],
   },
-  message: {
+  description: {
     type: String,
     required: [true, "Message is required"],
   },
