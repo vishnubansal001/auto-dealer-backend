@@ -4,7 +4,7 @@ const User = require("../models/user.js");
 
 exports.getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find();
+    const events = await Event.find().populate("userId", "name email");
 
     return res.status(200).json({ events });
   } catch (err) {
@@ -35,7 +35,10 @@ exports.closeEvent = async (req, res) => {
 
 exports.getSingleEvent = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);
+    const event = await Event.findById(req.params.id).populate(
+      "userId",
+      "name email"
+    );
 
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
