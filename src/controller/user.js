@@ -51,6 +51,10 @@ exports.signIn = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
+
+    if (user.role !== "admin") {
+      return res.status(400).json({ message: "Unauthorized access" });
+    }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     return res
       .status(200)
