@@ -31,6 +31,11 @@ const orderSchema = new mongoose.Schema({
     ref: 'Unit',
     required: [true, "Unit is required"],
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, "User is required"],
+  },
 }, { timestamps: true });
 
 const Order = mongoose.model('Order', orderSchema);

@@ -14,6 +14,7 @@ const eventSchema = new mongoose.Schema(
     raiseDate: {
       type: String,
       required: [true, "Raise Date is required"],
+      default: Date.now().toString(),
     },
     closeDate: {
       type: String,
