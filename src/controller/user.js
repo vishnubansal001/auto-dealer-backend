@@ -39,19 +39,16 @@ exports.signUp = async (req, res) => {
 exports.signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
     if (!email || !password) {
       return res
         .status(400)
         .json({ message: "Please enter email and password" });
     }
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
@@ -60,7 +57,6 @@ exports.signIn = async (req, res) => {
       return res.status(400).json({ message: "Unauthorized access" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    console.log(token);
     return res
       .status(200)
       .json({
