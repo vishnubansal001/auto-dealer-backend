@@ -2,26 +2,20 @@ const Unit = require("../models/unit");
 
 exports.getAllCars = async (req, res) => {
   try {
-    const { year, price, name, model } = req.query;
+    const { price, make, oil } = req.query;
 
     let searchFilter = {};
-
-    if (name) {
-      searchFilter.unitName = new RegExp(name, "i");
-    }
-
     const detailsFilter = [];
-
-    if (year) {
-      detailsFilter.push({ key: "year", value: year });
-    }
 
     if (price) {
       detailsFilter.push({ key: "price", value: price });
     }
 
-    if (model) {
-      detailsFilter.push({ key: "model", value: model });
+    if (make) {
+      detailsFilter.push({ key: "make", value: make });
+    }
+    if (oil) {
+      detailsFilter.push({ key: "oil", value: oil });
     }
 
     if (detailsFilter.length > 0) {
