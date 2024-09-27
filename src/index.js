@@ -17,7 +17,7 @@ const init = async () => {
   const app = express();
   const port = process.env.PORT || 4000;
   const corsOptions = {
-    origin:[ 'https://autodealer-admin.vercel.app', "https://autodealers-frontend-9pxx.vercel.app/"],
+    origin:[ 'https://autodealer-admin.vercel.app', "https://autodealers-frontend-hr1t.vercel.app"],
     credentials: true,
   };
 
